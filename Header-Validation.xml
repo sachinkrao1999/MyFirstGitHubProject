@@ -1,0 +1,3194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="00c1269f-3070-42c2-8526-f1004a001957" discardOkResults="true" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Header Validation" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" xmlns:con="http://eviware.com/soapui/config">
+      <con:settings>
+        <con:setting id="e6efea6d-26b7-4342-966a-9e0d9dea26e0fileName">Header-Validation</con:setting>
+        <con:setting id="00c1269f-3070-42c2-8526-f1004a001957fileName">Header-Validation</con:setting>
+      </con:settings>
+      <con:savedRecentRuns>1</con:savedRecentRuns>
+      <con:testStep type="calltestcase" name="Run TestCase - Authorization" id="b67cb63f-490d-4efa-b187-e4c9a88ea521">
+        <con:settings/>
+        <con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:targetTestCase>ff424896-c4f3-4e53-b13d-6031e7ab4cd1</con:targetTestCase>
+          <con:properties/>
+          <con:returnProperties/>
+          <con:runMode>SINGLETON_AND_WAIT</con:runMode>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Post - Create single code with trackingId Missing" id="47b1d8d2-0498-444a-bc85-2a355bdd774a">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="POST - trackingId Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Post - Create single code with trackingId Missing" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="a7f6018a-2011-4ef7-977b-77de5ff4af7e">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="5dda17cb-f69c-4850-ba67-5c615eff52ce">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="ed00c2e7-f780-4c25-86b8-6911f3c825ab">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="b2fc4043-562a-4fdb-a7ff-89046d54027a">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="053cea83-0d44-4ca7-b877-8c03243e5308">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="0167b229-184d-4e31-bf6d-58c336138aa8">
+              <con:configuration>
+                <token>"operation":"createHotelLimitedUseCode"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="e49617a0-f5e1-43a2-8845-457e0b25dc7c">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="a71f0022-21fe-4424-a8f6-2ad071df0c3b">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="ed00c2e7-f780-4c25-86b8-6911f3c825ab">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Post - Create single code with requestor Missing" id="451896dd-b1c4-458f-9a72-61eabb96fe4b">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="POST - requestor Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Post - Create single code with requestor Missing" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="a63a6feb-2105-45dc-b852-97eef5dd45a2">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="d2ebcc33-dc78-4332-953e-a937ccdcae24">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="1b0eeceb-da13-443d-b358-fd8dbef43eb4">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="02d9a266-c96e-4006-b2fd-c55e63cc674b">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="7697b2e1-7153-482e-aad9-254ef345585f">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="43fe8c27-cd0a-45e7-8f87-83653b2ce0f7">
+              <con:configuration>
+                <token>"operation":"createHotelLimitedUseCode"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="92ab9c8e-ee64-43f7-9f02-797d46bcb5d7">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="414edc80-18cc-4b0d-a4c6-cb370e873407">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="36feb9d5-1b93-4c11-a1c6-c400b21ee678">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Post - Create single code with trackingId and requestor Missing" id="32297b6d-0481-43ef-81f8-ab15837a6df6">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="POST - both Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Post - Create single code with trackingId and requestor Missing" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="ff62e825-0618-4a13-938c-6c9a833cb7c5">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="6140ea6a-d4d4-4817-b846-1b238da33b7a">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message - missing trackingId" id="c4488938-0eb5-44c3-a5e7-646a8f04ce3c">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code  -missing trackingId" id="9324c2d6-1893-4d69-9550-1b7a5debb91a">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message -  missing requestor" id="4bc89a4c-09ba-438d-89fb-e50a7884d164">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - missing requestor" id="1bff3b9a-1bcd-4586-988c-b43c698bfe96">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="c5b038cc-b63a-4596-9cda-dea35422e8bd" name="Match content of [service]">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="8e73647a-3ff4-4b09-847b-7f1e065dd878" name="Match content of [version]">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="52bf4c3f-6c86-43dc-8366-c6b2e09d6223" name="Match content of [operation]">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["createHotelLimitedUseCode","createHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="8b90f9bb-f877-4e4d-9bfa-b8a5e2dae55e" name="Match content of [type]">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="11bf2048-62ab-40db-8090-7c281ca3035d">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="11bf2048-62ab-40db-8090-7c281ca3035d">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Post - Create single code with trackingId and requestor Empty" id="89ddd84d-77c7-4adb-af4f-aefdc418bcdc">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="POST - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Post - Create single code with trackingId and requestor Empty" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">&#13;
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value=""/>&#13;
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value=""/>&#13;
+&lt;/xml-fragment></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="0250e105-748d-4167-86bb-86280979d1c8">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="dd31ff6f-aa1a-4c1e-9118-265dad44a2c8">
+              <con:configuration><path>$['messages'][*]</path><content>4</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="935591a6-9a70-492c-80e3-d4f6e1cfd58c">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="8fb6c0a3-d7c2-4b9b-934b-39c60d65085a">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="89d213af-0697-4ed1-9715-79a4f3bf1928">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="755098d4-0038-4741-ba8b-1f1262d2d571">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="5458e839-c314-4707-aab3-d72fc8571c1b">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="87897cee-4d78-485b-a0c8-565f09aade04">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="bf68487b-df74-4194-a814-8382f1bd303e">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["createHotelLimitedUseCode","createHotelLimitedUseCode","createHotelLimitedUseCode","createHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="04217584-521f-4350-8de7-253b6ff4e7c2">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS","BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="50d9e9de-991f-4331-b923-2bcdff3809b7">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="852f30e7-e42c-4307-9635-c3c9752231fe">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="d0adfda8-682e-4788-af5e-8871213fd3db">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="d02f8e7b-40e7-408a-9e8a-148a4b93f73e">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="480554e0-645e-42cd-9bd6-d54d9f293cc7">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="480554e0-645e-42cd-9bd6-d54d9f293cc7">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="719af626-0497-417c-bdce-68aeb3816086" name="Match content of [messages]"><con:configuration><path>$['messages'][?(@.code == "REQUESTOR_INVALID_SIZE")]</path><content>[{"message":"requestor must be between 1 and 256 characters","service":"HOTEL_LIMITED_USE_CODE_SERVICE","version":"*","operation":"createHotelLimitedUseCode","property":"requestor","code":"REQUESTOR_INVALID_SIZE","type":"BUSINESS"}]</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Post - Create single code with trackingId Empty" id="83cd26ea-782f-40c8-ab1a-edbf4683a9a2">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="POST - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Post - Create single code with trackingId Empty" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-TrackingId" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="8920d8f5-326f-4ea8-bc43-1e78a2a6f640">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="cbb01305-a3d7-4dbc-93c1-0ac5c57e16a3">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="9885e0d3-e0da-46ad-a4e1-462107b871f4">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="a117e6a4-791c-46e9-8a32-6b1129d576b6">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="9885e0d3-e0da-46ad-a4e1-462107b871f4">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="a117e6a4-791c-46e9-8a32-6b1129d576b6">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="8b8c8689-3e0c-40f6-9076-0dea2d7aeca5" name="Match content of [service]">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="57d67f99-c9a7-4ff3-8d3d-a21fa3cb3f30" name="Match content of [version]">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="812b22c4-8f60-4a21-8096-f542e986c847" name="Match content of [operation]">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["createHotelLimitedUseCode","createHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" id="475e9942-d545-4467-9219-2b3ed1c4ce70" name="Match content of [type]">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="d1f16397-56ba-403e-a2fe-e0ce2884d0e4">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Post - Create single code with requestor Empty" id="5df5b959-0bd6-4638-8141-8995573da8c1">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="POST - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Post - Create single code with requestor Empty" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-Requestor" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="b6e468c1-1082-4ea7-820d-d2eaf4e6d4c0">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="7904d513-a34c-47f4-bcac-12e23f00c9c2">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="4be21149-6309-47d9-b921-6c46c0a2770b">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="6608a4a7-11b4-49f0-8c2e-d55f31254ff7">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="fc73e876-2216-47e6-b78d-02c510f18196">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="89d325de-87af-49c5-9efe-af68a3ecb306">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="2ce81b0b-8f28-4d2d-96f2-b653fa170a21">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="2e01269f-18c1-4f24-814f-fa77bf8dad19">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="7222c14f-2606-4d69-aff2-6c16af52e820">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["createHotelLimitedUseCode","createHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="92895140-2ea5-423f-a14a-de2552b4f4b4">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="958697c5-cc96-487d-9591-c6a4039699cd">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="  "/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add consumptionData with trackingId Missing" id="f9a34d97-b28c-45ad-968e-b306f2de155f">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}/consumptionData" methodName="PUT - Consumed - trackingId Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add consumptionData with trackingId Missing" id="68f7ebdd-b171-4273-9408-57fe69d77faa" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"transactionId": "849385533",
+	"transactionIdQualifier": "RESERVATION_CONFIRMATION_CODE"
+}</con:request>
+            <con:originalUri>http://hluc-v1-8ow13.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/consumptionData</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="517bd8bc-99e4-42bd-95c5-ae877362156c">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="f7bc06f1-cc55-4c57-a1b5-fef34d570b90">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="ed4bdd62-d75b-4b85-a728-f896d16ec6ae">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="8696be9d-9884-4403-b074-81be3dfd8ea0">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="f1163351-0c58-4df5-a2e4-4cddefdd9ea5">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="1e840d2b-6f3c-4190-9677-f1cc3a892ce3">
+              <con:configuration>
+                <token>"operation":"updateConsumptionData"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="2966da43-8064-4c28-a34e-a93684337842">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="fe11774c-80a4-4218-8701-6bac281573b8">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="1c6a76be-36f6-4169-b686-cb3cecb14327">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add consumptionData with requestor Missing" id="8ca170ac-0775-4791-9775-fbc706a8ee66">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}/consumptionData" methodName="PUT - Consumed - requestor Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add consumptionData with requestor Missing" id="68f7ebdd-b171-4273-9408-57fe69d77faa" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"transactionId": "849385533",
+	"transactionIdQualifier": "RESERVATION_CONFIRMATION_CODE"
+}</con:request>
+            <con:originalUri>http://hluc-v1-8ow13.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/consumptionData</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="f1029dd5-dc8d-4a9e-ab1c-bacf43b34eb4">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="300ad2a1-a2ad-4115-b43d-9cfa14bb5380">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="76903bfc-9dca-4432-906e-6a1fa2287ed2">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="c607743a-4d3c-40bf-8b6e-7b9c7cac8e05">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="ae3d3798-053a-4a19-b8f1-9459e5db7432">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="7de58617-2535-492b-bc84-b73603f711b8">
+              <con:configuration>
+                <token>"operation":"updateConsumptionData"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="dc25174d-233b-48b8-b57c-ef2c9185f1e6">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="bce0ff39-ced1-47e0-a0ca-3d943161c1f1">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="fce27c3c-46cb-44ac-9462-a49040ec90c7">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add consumptionData with trackingid and requestor Missing" id="a9c89c3e-1852-446f-804b-b9b69e9810ed">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}/consumptionData" methodName="PUT - Consumed - both Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add consumptionData with trackingid and requestor Missing" id="68f7ebdd-b171-4273-9408-57fe69d77faa" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"transactionId": "849385533",
+	"transactionIdQualifier": "RESERVATION_CONFIRMATION_CODE"
+}</con:request>
+            <con:originalUri>http://hluc-v1-8ow13.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/consumptionData</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="0852099b-0198-42ba-9358-f83c6afd5d69">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="60630508-1370-4f02-9903-20042dea1111">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message - missing trackingId" id="41f664ef-03d5-44ad-bc10-01cd42255d84">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code  -missing trackingId" id="72c7d31b-bb6b-4121-b61f-f214c1564002">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message -  missing requestor" id="7cc51138-edaf-43a1-ac30-0130096ee678">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - missing requestor" id="793f0782-a195-43ab-b1ac-c51abe3344b1">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="c47a1062-85b1-429c-8679-564d1b1d1893">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="455e3e56-6f00-417f-be03-d28e6e0cfa58">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="ed47b399-0509-400d-a632-05d1aa9cf525">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["updateConsumptionData","updateConsumptionData"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="67b5d622-6b07-468d-964a-2a55fbd64247">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="a9fc149a-2567-4ebc-b0d1-a0670a954dd6">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="1816e1f5-6aff-46a4-9877-2d7e15d342d1">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add consumptionData with trackingid and requestor Empty" id="147d8b3c-8c76-4e63-b55d-beb569030c3a">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}/consumptionData" methodName="PUT - Consumed Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add consumptionData with trackingid and requestor Empty" id="68f7ebdd-b171-4273-9408-57fe69d77faa" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value=""/>
+&lt;/xml-fragment></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"transactionId": "849385533",
+	"transactionIdQualifier": "RESERVATION_CONFIRMATION_CODE"
+}</con:request>
+            <con:originalUri>http://hluc-v1-8ow13.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/consumptionData</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="6ed752ea-0615-4d41-8a91-bfc1c98b7cca">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="50d1e4ea-d277-43dc-9829-ccbce7607068">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>4</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="09c2863a-404a-45dc-be3a-1de71f6a2b63">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="64fba173-8506-45df-8e5c-37e5f9e6ba7e">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="39eb2a06-bed5-4f40-8ffa-a80d9c172b93">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="6408feaf-f616-4795-948e-cb62a7a480f0">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="20ec80e8-3a1e-433e-9111-4fca3d6237ad">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="e7ac5668-19ef-41a6-98b9-69e1e1dd55d8">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="ec9773df-8777-405a-b679-a6b2f6b91b74">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["updateConsumptionData","updateConsumptionData","updateConsumptionData","updateConsumptionData"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="1b3c5b2b-a2a3-4320-9bd1-6e3cbc2ca201">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS","BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="09e7a4fd-962a-4287-acde-6a10ce7a811d">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="b9f2c6a9-84ec-4410-8381-0d66dcdd1a95">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="706bcab8-28e8-4c0e-9b60-3e8dc812b207">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="3187a7ad-9007-4de8-9519-c9b84408d216">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="eea44e3d-278c-4417-b1a7-d8df5b686aef">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="176071e7-fd58-4521-b25b-3a0a1a7199ac">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add consumptionData with trackingId Empty" id="d036e9df-e0df-40a9-bbf7-4eddd5e37baf">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}/consumptionData" methodName="PUT - Consumed Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add consumptionData with trackingId Empty" id="68f7ebdd-b171-4273-9408-57fe69d77faa" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-TrackingId" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"transactionId": "849385533",
+	"transactionIdQualifier": "RESERVATION_CONFIRMATION_CODE"
+}</con:request>
+            <con:originalUri>http://hluc-v1-8ow13.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/consumptionData</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="38f98c74-fa06-4901-8d8e-e56664c033fd">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="adf2ee99-18a5-4611-83fb-51fb488c36a6">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="d69f4035-4efb-4aae-80bc-3181232a6109">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="de41eaf2-0222-4a88-909a-f2551d834576">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="27632e24-dac2-4a2d-8553-520918407225">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="e2056225-6d3b-4cc9-8449-4b24a1c9470a">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="37485f1c-529a-42be-bc3f-0117f6d2648a">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="10003f53-befb-47b5-ae07-1cabe37637c0">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="c2728063-54ae-4e2a-8fe4-94f39de36c33">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["updateConsumptionData","updateConsumptionData"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="f907cc63-0b3d-4a0a-957b-5796c8aa40e6">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="d3d3f102-697a-4550-b0ca-a6fc2ac62ed8">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add consumptionData with requestor Empty" id="8a5f2efe-9871-4a56-9873-ed4afcb33e95">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}/consumptionData" methodName="PUT - Consumed Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add consumptionData with requestor Empty" id="68f7ebdd-b171-4273-9408-57fe69d77faa" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-Requestor" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"transactionId": "849385533",
+	"transactionIdQualifier": "RESERVATION_CONFIRMATION_CODE"
+}</con:request>
+            <con:originalUri>http://hluc-v1-8ow13.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/consumptionData</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="1649c6bd-5fe9-4723-9f50-0cfd84f403ef">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="d47229ad-113b-4b87-a5c7-d0a229e4210e">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="9f7b180d-cdf4-45bc-a75f-48086ba6bb0e">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="fe8093ff-fced-4e1b-a81f-586dcff0d668">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="b201e2ee-641a-4e13-8eae-7b062c00efa3">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="9363132b-a662-4194-8b53-7ed705a6459d">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="7a6b180a-94c2-47cc-9c9e-c8e02fd87b21">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="265efa04-049c-4afc-9547-f02ff6465585">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="305467d5-28a7-44d1-9f7f-972cd44c74aa">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["updateConsumptionData","updateConsumptionData"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="f6a26860-8d93-401f-8cdd-8c358a99eb0d">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="c39e842f-7ad4-49f9-88cf-ebb90ffa253f">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value=""/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Get- HotelLimitedUseCode by orgCode and code with trackingId Missing" id="af1366be-93e1-43de-ad45-17140c848868">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}" methodName="GET - trackingId Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Get- HotelLimitedUseCode by orgCode and code with trackingId Missing" id="c361481b-3416-4afd-960d-733ff8e85575" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://hluc-v1-1sw12.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="d22719b8-200e-4d90-8a92-a2d2571db7c7">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="91f21c09-41fa-4679-b1af-f20a3054d5bc">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="d5cc7a8e-4271-4818-87ce-11e60e0358e3">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="ea5a19fd-827a-48f3-8cf4-77421da61dec">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="65cea042-0211-4766-8197-d983a00791b6">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="e33c1cd6-fb90-4b47-b6cb-204fb6ae8ae7">
+              <con:configuration>
+                <token>"operation":"getHotelLimitedUseCode"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="85ed82d0-eca0-4b52-ae5b-62ef9ae1c8bc">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="93261754-cc15-4454-b156-41d04e812c9a">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="b3e61159-752a-4f46-b3d2-aa8aa5393ab7">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Get- HotelLimitedUseCode by orgCode and code with requestor Missing" id="621ed7ed-c4e3-4534-9f13-34f8e0745697">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}" methodName="GET - requestor Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Get- HotelLimitedUseCode by orgCode and code with requestor Missing" id="c361481b-3416-4afd-960d-733ff8e85575" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://hluc-v1-1sw12.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="0092aa09-2c49-4f0a-945e-24d91b2e085a">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="688a3ee7-c4ea-4209-b65e-169271bd2bbd">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="f03b33c8-60d3-45e0-aee7-9c189b54ee34">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="1c1fb850-0255-478b-bf1e-1dbd096e96dd">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="1d6ac380-186f-4864-ab51-d458769e728f">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="0aef24ff-282a-4f19-ab90-ab9487057408">
+              <con:configuration>
+                <token>"operation":"getHotelLimitedUseCode"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="298a24e0-295f-486d-b53b-15a3de204cba">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="0a58eb65-ceec-42fd-84d1-0ab3bf01c498">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="e20980b0-cf88-4efd-a496-acff9c9cbe29">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Get- HotelLimitedUseCode by orgCode and code with trackingId and requestor Missing" id="1b79d7ae-5217-40ae-879a-a83fc975fc54">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}" methodName="GET - both Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Get- HotelLimitedUseCode by orgCode and code with trackingId and requestor Missing" id="c361481b-3416-4afd-960d-733ff8e85575" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://hluc-v1-1sw12.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="072ec349-9a56-44e2-a1b5-d172a922b613">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="128271de-60e0-44e6-9f51-f9e9bb971906">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message - missing trackingId" id="829773a9-f152-48a8-877a-b47c323dacdd">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code  -missing trackingId" id="faaf73d4-97c2-422f-bbe2-3efc9b82f5ef">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message -  missing requestor" id="06d71cbd-639a-4262-9fde-23a1a76cd0fe">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - missing requestor" id="ae98d8cd-59b4-45a3-b5ea-4bdb14d7629f">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="c07aef59-e7fd-44a8-ac9e-f6e081520538">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="279e5249-42d0-4f3c-9c75-dd868f597ad3">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="d2587a8b-7bbe-4666-b201-1d6d6bd9064c">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["getHotelLimitedUseCode","getHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="8997ada2-ce21-4d61-9a6f-d96ebb7e8cd0">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="78543231-ccea-4e5f-aed1-62f67533fda6">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="41706622-5982-4bb8-819b-0efa3d50fb68">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Get- HotelLimitedUseCode by orgCode and code with trackingId and requestor Empty" id="1ef655f6-41a4-462e-9b15-2d859a501602">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}" methodName="GET - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Get- HotelLimitedUseCode by orgCode and code with trackingId and requestor Empty" id="c361481b-3416-4afd-960d-733ff8e85575" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value=""/>
+&lt;/xml-fragment></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://hluc-v1-1sw12.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="6cf75338-5bb2-40e6-a990-5648d4fcf295">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="1cae1e21-3479-4e18-9a05-5ff4e43dd842">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>4</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="5b12c4b0-8722-40d0-a9f3-a8b3e57a8b19">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="6a53d975-06fc-4aad-aa34-d5649ec117cf">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="46773b52-348d-4eb1-9f7d-18a4becdf850">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="44df3c90-1559-4e11-aad1-837911041f05">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="8d7e5f0c-58ce-40e4-9c55-5233741f463c">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="b82331d3-e2fe-476d-87f4-992f40b1f56b">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="8fc3bb3b-dea2-447c-be92-5db182c057a1">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["getHotelLimitedUseCode","getHotelLimitedUseCode","getHotelLimitedUseCode","getHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="0f3e0411-81b3-4bfb-a86c-60ef5be59945">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS","BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="b15969f6-349f-4bf6-80ad-736eee29a182">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="003c9475-522f-40f8-8dd9-17804dbba203">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="9567bfdb-9741-409d-beba-78c411a1e021">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="e5933084-0f75-4063-8d89-a1ea5ac9d067">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="b8d88e0d-c7e8-4e39-bd6d-4ca8ad721cf6">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="08ba29c6-892e-4524-9279-c52d8fcf245d">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value=""/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Get- HotelLimitedUseCode by orgCode and code with trackingId Empty" id="f8ec6a0f-8b14-4bd8-ac7d-6a81191f071e">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}" methodName="GET - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Get- HotelLimitedUseCode by orgCode and code with trackingId Empty" id="c361481b-3416-4afd-960d-733ff8e85575" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-TrackingId" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://hluc-v1-1sw12.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="f2d64ec9-ff2d-43b0-8b3a-0f3eb2880148">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="31dcc994-60c3-4ded-aad1-5adeba176b7a">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="f612ce37-e788-4fcf-a8a8-2e5d0c96ff77">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="6d7645bd-e4de-466c-ae9e-18fe78c18cf9">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="cc43b37c-86b3-4838-a219-f82fc1dd4e16">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="31fbc96b-8e70-4ce4-a31d-c5a6c398cf96">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="9f210ab4-8c4c-41b3-8340-c864bfc6429f">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="3129d2e3-8e02-455e-b801-d4a68793ff11">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="755036c3-5fd6-42a2-b5f3-e8279c447431">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["getHotelLimitedUseCode","getHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="55be21a8-2a41-4fa4-9563-1da5d6c33dcb">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="9251fe56-c0c3-4996-8888-59dc192a20b0">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Get- HotelLimitedUseCode by orgCode and code with requestor Empty" id="66cbdee7-fd8e-4646-a43f-1a2230502c16">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/{organizationCode}/{codeQualifier}/{code}" methodName="GET - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Get- HotelLimitedUseCode by orgCode and code with requestor Empty" id="c361481b-3416-4afd-960d-733ff8e85575" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-Requestor" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://hluc-v1-1sw12.dev.aws.chotel.com/v1/hotellimitedusecode/DE1_EC/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="49a2a79e-85d5-4a33-ae1e-bdd232d765d2">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="bb4023f6-cc62-461c-a866-23ed710db0a2">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="645e5156-a663-45d8-ae0c-86cab1430867">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="49c58db5-ebde-4fb3-8fd2-df838cdabd67">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="bae0aed2-d541-4211-98f1-460a6715d4db">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="9206187e-cef3-417e-8b40-7cc5d700afc8">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="3ec9dad9-6ee0-4f18-a2bd-321d2c239f8e">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="5506dec1-c743-447f-871f-8caae9e9ee32">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="61dd2c7f-8921-48a8-b56a-d4ad64de0bb9">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["getHotelLimitedUseCode","getHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="42dc6d94-c496-47c2-b89c-3bdc818e1aea">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="c3c17ec8-c152-454e-b9dd-a5af423083ca">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="code" value="INVALID"/>
+              <con:entry key="organizationCode" value="${#Project#orgCode}"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="codeQualifier" value="${#Project#codeQualifier}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value=""/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>organizationCode</con:entry>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>code</con:entry>
+              <con:entry>codeQualifier</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add/update single code with trackingId Missing" id="fbdf3abd-befb-48f2-bdde-9c5d0e92b4e5">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="PUT - trackingId Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add/update single code with trackingId Missing" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"code": "PUTTEST",
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="5429f80f-f300-4d4a-b426-55fc599135c4">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="88d007c4-86f4-43b5-976b-7acdd617fbe6">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="c69fc95c-0b0a-4ca7-93d4-721466a45b2b">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="1f1f6b62-4cea-431a-b8ce-065799088fb4">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="5a17c42b-4726-4ec0-bea1-e8604469acc4">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="3f9b67cf-627f-4c89-871c-3139240026d8">
+              <con:configuration>
+                <token>"operation":"syncHotelLimitedUseCode"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="5d53a11d-51b6-41e8-8959-76e7cc851337">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="51a47dac-75bd-4ba2-8552-f35d30362f27">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="095817ef-6752-44ea-8561-28780a7e0e61">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add/update single code with requestor Missing" id="2061da63-8397-4624-8967-203c220febea">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="PUT - requestor Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add/update single code with requestor Missing" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"code": "PUTTEST",
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="30e1d620-dc48-4b5a-b1d8-3da0b7337de4">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="62786eff-a141-4d5d-96cb-23ed1656ab0f">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>1</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message" id="2777a46b-be8b-466f-9c79-5b3253d9eb3a">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - service" id="2c9401a8-356a-4a6c-834b-86301cc305aa">
+              <con:configuration>
+                <token>"service":"HOTEL_LIMITED_USE_CODE_SERVICE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - version" id="d7145a5b-20f7-498d-96cc-2eb249e0bf40">
+              <con:configuration>
+                <token>"version":"${#Project#serviceVersion}"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - operation" id="3a16a3ae-79e6-4d4a-98bd-36480c39690f">
+              <con:configuration>
+                <token>"operation":"syncHotelLimitedUseCode"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code" id="9d14f11c-23fc-40fa-ae27-3dbb6a966b93">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - type" id="d8b526f0-9083-4fa0-8060-465dab1d5f2c">
+              <con:configuration>
+                <token>"type":"BUSINESS"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="cf0ff0c2-6e77-4a54-8d94-6f569971a1bb">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add/update single code with trackingId and requestor Missing" id="49e64ff4-aa78-4f9d-b55b-a112defd4519">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="PUT - both Missing" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add/update single code with trackingId and requestor Missing" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"code": "PUTTEST",
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="536667d4-dc3d-4e62-b583-0a374afabe7a">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="15dbc8ae-bfa2-4035-9bb8-92b1cc4736c3">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message - missing trackingId" id="67f08b4b-8dc9-4509-a64a-cf122a6a108b">
+              <con:configuration>
+                <token>"message":"trackingId header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code  -missing trackingId" id="f174a4af-f8d5-49b7-8c74-eee1c2f7aec5">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message -  missing requestor" id="bd61fd3b-5ac1-4390-870d-9e2f798bc8fd">
+              <con:configuration>
+                <token>"message":"requestor header is missing"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - missing requestor" id="716b2e85-7119-4153-932b-9d95bd0c7498">
+              <con:configuration>
+                <token>"code":"REQUESTOR_MISSING"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="c125d79b-9a86-47e5-b3b6-968d22281f12">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="112a3e5a-a469-45d7-922e-655e1200321c">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="41a9358c-2922-48f1-a10f-d2a9575be283">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["syncHotelLimitedUseCode","syncHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="60de2035-0f46-467c-888e-3d31dcf6c529">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="c734a377-a6aa-4eb1-be09-b718f8ce9eb9">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="64e11a54-31e6-46d5-a710-2eaa73d33ea0">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add/update single code with trackingId and requestor Empty" id="afeb44ba-98eb-4ef5-a8f7-e133a313dea1">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="PUT - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add/update single code with trackingId and requestor Empty" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value=""/>
+&lt;/xml-fragment></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"code": "PUTTEST",
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="92995c90-13a6-4e0f-b3b2-cc50b0b4404b">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="0082a74d-5c96-4e81-baf4-1a03998d8800">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>4</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="712b1ccd-090d-4554-8b59-9b8464d42be8">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="3a18e8bd-6b63-4962-acda-26d81996c2c9">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="7b0c1e65-ce25-40c0-82fa-4b7968162a5c">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="5b8696fb-4884-4134-95a2-7cffb21b757d">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="2aa227c9-6236-4cd3-91e2-5a44f86d0a6d">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="6e5c1606-e72e-4ac6-8292-8e860a6b9ade">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="0bd8bff3-05c8-47d6-ad96-ccf718ee0ab3">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["syncHotelLimitedUseCode","syncHotelLimitedUseCode","syncHotelLimitedUseCode","syncHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="d1f0bf6e-1702-4e23-a5fb-06cf6c744f44">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS","BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="4cc9787c-900a-4ec1-b345-41439db44e81">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="b38fce20-f051-49a0-8c94-88fd725e12b1">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="01805bb3-397e-48b0-bcbe-a1472cb1fceb">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="e3c4dae4-4a69-42c7-8132-8733398c85d0">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - trackingId" id="1c289ff3-4c57-42c2-8ebf-44e539fb7f32">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property - requestor" id="4e056957-46a0-48c6-8130-42ce2ba40720">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+              <con:entry key="X-ChoiceEdge-Requestor" value=""/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add/update single code with trackingId Empty" id="179bebff-0230-487e-b56c-6249e0454bd0">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="PUT - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add/update single code with trackingId Empty" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-TrackingId" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"code": "PUTTEST",
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="82c13d7f-893c-42ea-ac19-823e24695a33">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="5c1e8253-5143-47d0-9c5c-1f723ef3b91c">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId size" id="313d9ea2-b038-42aa-b3ea-70c6c05a18cd">
+              <con:configuration>
+                <token>"message":"trackingId must be between 5 and 36 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid size" id="8e37aab2-daf6-47b7-82d7-882034e59b08">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid trackingId" id="7888d9eb-8429-4caf-a5b0-638444ae596c">
+              <con:configuration>
+                <token>"message":"trackingId is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid trackingid" id="6c4d1dde-8921-44ac-b00e-5bfda6fd9a37">
+              <con:configuration>
+                <token>"code":"TRACKING_ID_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="c47ddb83-feac-477b-9790-e79e99fbe45a">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="d2e3c56e-5c13-4263-b97c-47e228e3015e">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="66d78af3-bff3-4196-8672-9493c71d8d3a">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["syncHotelLimitedUseCode","syncHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="5b67c1b0-4649-465f-b0e9-06739a49dd4a">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="805b0386-ec42-4615-a110-6d3e05fcd415">
+              <con:configuration>
+                <token>"property":"trackingId"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+              <con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="Put - Add/update single code with requestor Empty" id="836fb951-1b69-4304-ba18-4bc3e97fc034">
+        <con:settings/>
+        <con:config service="Service 1" resourcePath="/v1/hotellimitedusecode/" methodName="PUT - Code" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Put - Add/update single code with requestor Empty" id="0c747e1b-9e00-43b3-a782-52a16d8a733b" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-ChoiceEdge-Requestor" value="" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>${#Project#endpoint.hotellimitedusecode}</con:endpoint>
+            <con:request>{
+	"code": "PUTTEST",
+	"codeQualifier": "${#Project#codeQualifier}",
+	"organizationId": "${#Project#organizationId}",
+	"effectiveDateSpan": {
+   		"startDate": "${#Project#today}",
+   		"duration": "P4D"
+  	},
+  	"creationData": {
+  		"timestamp": "${#Project#today}T10:30:15Z",
+   		"requestor": "${#Project#requestor}"
+   }
+}</con:request>
+            <con:originalUri>http://hluc-v1-uco04.dev.aws.chotel.com/v1/hotellimitedusecode/</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Codes" id="2a6089fb-6182-4974-804a-1c6c12b21444">
+              <con:settings/>
+              <con:configuration>
+                <codes>400</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Count" name="Check count of [messages]" id="38d027dc-c662-47d1-af11-39e02af9302f">
+              <con:configuration>
+                <path>$['messages'][*]</path>
+                <content>2</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor size" id="f75377fd-844a-4554-a130-a9bde4996afe">
+              <con:configuration>
+                <token>"message":"requestor must be between 1 and 256 characters"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor size" id="4ff48959-85ef-4f71-a4c2-0518a7922603">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID_SIZE"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - message for invalid requestor" id="4e7548e1-325f-4571-b80a-e4450f62b80c">
+              <con:configuration>
+                <token>"message":"requestor is invalid"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - code - invalid requestor" id="5aa2ef08-4c27-422d-98f1-ea5ab02074d1">
+              <con:configuration>
+                <token>"code":"REQUESTOR_INVALID"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [service]" id="aa6fdf4c-a744-401a-8217-5e39c434bde3">
+              <con:configuration>
+                <path>$['messages'][*]['service']</path>
+                <content>["HOTEL_LIMITED_USE_CODE_SERVICE","HOTEL_LIMITED_USE_CODE_SERVICE"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [version]" id="08ab97a6-434e-4a07-9b7b-25189eee1455">
+              <con:configuration>
+                <path>$['messages'][*]['version']</path>
+                <content>["${#Project#serviceVersion}", "${#Project#serviceVersion}"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [operation]" id="7413165d-99e1-4b58-baa2-6c1e4286eb81">
+              <con:configuration>
+                <path>$['messages'][*]['operation']</path>
+                <content>["syncHotelLimitedUseCode","syncHotelLimitedUseCode"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="JsonPath Match" name="Match content of [type]" id="41de8d7d-e005-48ba-a168-3f039326580b">
+              <con:configuration>
+                <path>$['messages'][*]['type']</path>
+                <content>["BUSINESS","BUSINESS"]</content>
+                <allowWildcards>false</allowWildcards>
+                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+                <ignoreComments>false</ignoreComments>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Simple Contains" name="Contains - property" id="cb9dfeca-408b-40a9-a4aa-78a3da095211">
+              <con:configuration>
+                <token>"property":"requestor"</token>
+                <ignoreCase>false</ignoreCase>
+                <useRegEx>false</useRegEx>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters>
+              <con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+              <con:entry key="quantity" value="1"/>
+              <con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#TrackingId}"/>
+              <con:entry key="X-ChoiceEdge-Requestor" value=""/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>X-ChoiceEdge-TrackingId</con:entry>
+              <con:entry>X-ChoiceEdge-Requestor</con:entry>
+              <con:entry>Authorization</con:entry>
+              <con:entry>quantity</con:entry>
+            </con:parameterOrder>
+            <con:environmentSpec>
+              <con:entry environmentId="f7f95a43-08f9-454d-801b-fcbfad5a7c2b">
+                <con:authProfile>Inherit From Parent</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>105d83fc-396e-4ca2-b91e-eb8b74ded975</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>85c8abb5-f840-44b2-9000-c1d4646dc390</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>76090dc0-ef47-4ff4-baa4-948275de6fc4</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f892471f-e3cc-401e-b67e-badda0c991a2</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>4510bead-8f85-41dd-915d-4b1d351e24d7</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>98dd55f3-a35f-4361-9440-ce0413e73221</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>03bb203e-2bfa-4376-9580-0bcc94c52760</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>911a88f5-3d09-4159-925e-100b570362d8</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>d86ec352-a4f8-4f0e-90a4-90683f52a247</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>301ee8ff-999f-4208-a3fc-825379216651</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>bb6a4a25-20dd-4d3b-b340-3b9a99b40ed1</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3692a241-b2f8-4260-a629-6a745c795567</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>de4de94f-4625-4ed3-b279-c78603badb31</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>4c0f2eac-726e-409f-bd95-69f1e49180dc</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>c91fe4dc-2319-47fc-adc1-cc88d6598de1</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f94a4af6-6d2f-41c0-8eab-26bf267179f9</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    </con:testCase>
