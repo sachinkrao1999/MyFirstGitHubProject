@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="6ce560f6-b08c-4197-843d-c07e0c703065" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Header validations" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" zephyrTestName="" zephyrTestId="" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="4c4ee2f2-59da-4fab-be0f-dce8ac3badfbfileName">Header-validations</con:setting>
+  </con:settings>
+  <con:testStep type="calltestcase" name="Run TestCase - Authenticate" id="d4928a7b-3939-4249-a62e-b8ff0e48262e">
+    <con:settings/>
+    <con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:targetTestCase>40013f8c-656f-4c0c-8d96-a12003d6163d</con:targetTestCase>
+      <con:properties/>
+      <con:returnProperties/>
+      <con:runMode>SINGLETON_AND_WAIT</con:runMode>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - Missing AuthorizationToken" id="67f0fb5d-455e-431e-8448-f4e5e31ce731">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/guestnotification" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - Missing AuthorizationToken" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">&#13;
+  &lt;con:entry key="Authorization" value=""/>&#13;
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>&#13;
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>&#13;
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>401</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration><path>$['messages']</path><content>[{"message":"Authorization token header is missing","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendGuestNotification","code":"MISSING_AUTHORIZATION_TOKEN","type":"BUSINESS"}]</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - Expired AutorizationToken" id="92cab927-d338-41ed-96cd-a5d6e153758e">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - Expired AutorizationToken" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="${#TestCase#ExpiredToken}"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>401</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages']</path>
+            <content>[{"message":"Authorization token is invalid","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"INVALID_AUTHORIZATION_TOKEN","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - Invalid AuthorizationToken" id="5364931e-68a5-483e-8346-e8f68c559a04">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - Invalid AuthorizationToken" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="InvalidToken"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>401</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages']</path>
+            <content>[{"message":"Authorization token is invalid","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"INVALID_AUTHORIZATION_TOKEN","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - Missing TrackingId" id="1437dbc6-382b-4117-a229-dfd55f307e3d">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - Missing TrackingId" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>400</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages']</path>
+            <content>[{"message":"tracking header is missing","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"TRACKING_ID_MISSING","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - Missing Requestor" id="13f7acc7-e072-4b04-b029-9dd90afca0a2">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - Missing Requestor" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value=""/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>400</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages']</path>
+            <content>[{"message":"requestor is missing","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"REQUESTOR_MISSING","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - Missing TrackingId and Requestor" id="e9c41203-532b-4401-989b-5165a7e3b1f7">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - Missing TrackingId and Requestor" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value=""/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value=""/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>400</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Count" name="Check count of [messages]" id="3a682f02-dccb-4922-bd4f-9bfeb66d64ec">
+          <con:configuration>
+            <path>$['messages'].*</path>
+            <content>2</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages] - REQUESTOR_MISSING" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages'][?(@.code == "REQUESTOR_MISSING")]</path>
+            <content>[{"message":"requestor is missing","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"REQUESTOR_MISSING","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages] - TRACKING_ID_MISSING" id="ff8ee081-0d35-4e7b-858b-b326b80bbbea">
+          <con:configuration>
+            <path>$['messages'][?(@.code == "TRACKING_ID_MISSING")]</path>
+            <content>[{"message":"tracking header is missing","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"TRACKING_ID_MISSING","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - TrackingId size &lt; 5" id="7bf7bee9-c59d-4902-b976-ecae0e1c87ec">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - TrackingId size &lt; 5" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value="1234"/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>400</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages']</path>
+            <content>[{"message":"trackingId must be between 5 and 36 characters","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"TRACKING_ID_INVALID_SIZE","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - TrackingId size > 36" id="70b2ea66-b699-44ff-a965-8f3b069dc286">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - TrackingId size > 36" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value="ThisTrackingIdSizeIsGreaterThan_36_charactersInSize"/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value="${#Project#X-ChoiceEdge-Requestor}"/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>400</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages']</path>
+            <content>[{"message":"trackingId must be between 5 and 36 characters","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"TRACKING_ID_INVALID_SIZE","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="POST /v1/hotels/groups/guestnotification - Requestor size > 256" id="f2a9aa8e-3b23-41bb-8d3e-84d42c73767e">
+    <con:settings/>
+    <con:config service="HotelGroupNotification-v1" resourcePath="/v1/hotels/groups/plannernotification" methodName="" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="POST /v1/hotels/groups/guestnotification - Requestor size > 256" id="5ba68334-4aa9-432b-aa4b-9a5e502de63f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Authorization" value="${#Project#authorizationToken}"/>
+  &lt;con:entry key="X-ChoiceEdge-TrackingId" value="${#Project#X-ChoiceEdge-TrackingId}"/>
+  &lt;con:entry key="X-ChoiceEdge-Requestor" value="ThisRequestorSizeIsGreaterThan_256_eyJrYWgiOiJhdXRoc2VydmljZS0yMDE1IiwiYWxnIjoiUlMyNTYifQ.eyJpYXQiOjE3NDI5OTA3OTQsImV4cCI6MTc0Mjk5MTY5NCwic3ViIjoie1wicHJpbmNpcGFsc1wiOlt7XCJuYW1lXCI6XCJ1c2VybmFtZVwiLFwidmFsdWVcIjpcInFhX3VzZXI1XCJ9LHtcIm5hbWVcIjpcImNyc0R1dHljb2"/>
+&lt;/xml-fragment></con:setting>
+          <con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@use-get-method-on-302-redirect">false</con:setting>
+        </con:settings>
+        <con:encoding xsi:nil="true"/>
+        <con:endpoint>${#Project#Endpoint_HotelGroupNotification}</con:endpoint>
+        <con:request>{\r
+   "hotelGroup" : {\r
+      "groupCode" : "${#TestCase#groupCode1}"\r
+   },\r
+   "destinations" : [\r
+      {\r
+         "emailAddresses" : [\r
+            "test@choicehotels.com"\r
+         ]\r
+      }\r
+   ],\r
+   "locale" : "en-US"\r,
+   "notificationType" : "RESEND_GROUP_CREATION"
+}</con:request>
+        <con:originalUri>http://hotelgroupnotification-v1-upscl.qa.aws.chotel.com/v1/hotels/groups/groupcreation</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4436a16f-299f-4af9-a7eb-0aea173a3781" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>400</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" name="Match content of [messages]" id="675cb822-8e44-4e86-bbb4-0b02b5c72b3d">
+          <con:configuration>
+            <path>$['messages']</path>
+            <content>[{"message":"requestor must be between 1 and 256 characters","service":"HOTEL_GROUP_NOTIFICATION_SERVICE","version":"*","operation":"sendPlannerNotification","code":"REQUESTOR_INVALID_SIZE","type":"BUSINESS"}]</content>
+            <allowWildcards>true</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:properties>
+    <con:property>
+      <con:name>parentRatePlanId</con:name>
+      <con:value>M_tCAArdEfCFXArPFSPQOQ</con:value>
+    </con:property>
+    <con:property>
+      <con:name>groupCode1</con:name>
+      <con:value>FI27N1</con:value>
+    </con:property>
+    <con:property>
+      <con:name>ExpiredToken</con:name>
+      <con:value>eyJrYWgiOiJhdXRoc2VydmljZS0yMDE1IiwiYWxnIjoiUlMyNTYifQ.eyJpYXQiOjE3NDI5OTA3OTQsImV4cCI6MTc0Mjk5MTY5NCwic3ViIjoie1wicHJpbmNpcGFsc1wiOlt7XCJuYW1lXCI6XCJ1c2VybmFtZVwiLFwidmFsdWVcIjpcInFhX3VzZXI1XCJ9LHtcIm5hbWVcIjpcImNyc0R1dHljb2RlXCIsXCJ2YWx1ZVwiOlwiUlMsQ1AsUlosUFpcIn0se1wibmFtZVwiOlwiY3JzUmVzaWRcIixcInZhbHVlXCI6XCJQSFhSQyxSRE1SQyxPU0xSQ1wifSx7XCJuYW1lXCI6XCJjcnNkZWZSZXNJRFwiLFwidmFsdWVcIjpcIlJETVJDXCJ9LHtcIm5hbWVcIjpcImNyc2RlZkR1dHlcIixcInZhbHVlXCI6XCJDUFwifSx7XCJuYW1lXCI6XCJjblwiLFwidmFsdWVcIjpcIkpvaG5zb25cIn0se1wibmFtZVwiOlwib3JnQ29kZVwiLFwidmFsdWVcIjpcIkVDXCJ9LHtcIm5hbWVcIjpcImFjdGl2ZVJvbGVcIixcInZhbHVlXCI6XCJDUFwifSx7XCJuYW1lXCI6XCJhbGxvd2VkUm9sZXNcIixcInZhbHVlXCI6XCJDUCxSUyxDUCxSWixQWlwifV19IiwiaXNzIjoiQXV0aGVudGljYXRpb24gU2VydmljZSB2MSJ9</con:value>
+    </con:property>
+  </con:properties>
+  <con:reportParameters/>
+</con:testCase>
