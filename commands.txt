@@ -1,0 +1,6 @@
+1. Replace "RESEND_GROUP_CREATION" with "INVITE_GUEST_BOOK_ROOM" thoughout the file.
+2. Replace "{
+      "groupCode" : "${#TestCase#groupCode1}"
+   }" with "${#TestCase#groupPayload1}" thoughout the file.
+3. Replace the resourcePath value from "/v1/hotels/groups/plannernotification" to "/v1/hotels/groups/guestnotification" thoughout the file.
+4. Replace "sendPlannerNotification" with "sendGuestNotification" thoughout the file.
